@@ -24,9 +24,28 @@ public class Player : KinematicBody2D
 		GD.Print(accel.ToString() + " " + decel.ToString() + " " + jumpSpeed.ToString());
 	}
 	
+	Vector2 gunDir = new Vector2(1,0);
+
 	public override void _Process(float delta)
 	{
-		// movment logic --------------------------------------
+		DoMovment(delta);
+		DoGravity(delta);
+		MoveAndSlide(speed,new Vector2(0,-1));
+
+		if(Input.IsActionPressed("ui_right") || Input.IsActionPressed("ui_left")
+		|| Input.IsActionPressed("ui_up") || Input.IsActionPressed("ui_down")) {
+			gunDir.x = Input.GetActionStrength("ui_right") 
+				- Input.GetActionStrength("ui_left");
+			gunDir.y = Input.GetActionStrength("ui_down") 
+				- Input.GetActionStrength("ui_up");
+		}
+		
+		if(Input.IsActionPressed("fire"))
+			Shoot(gunDir);
+	}
+
+	void DoMovment(float delta)
+	{
 		float movInput = Input.GetActionStrength("ui_right") 
 				- Input.GetActionStrength("ui_left");
 
@@ -39,11 +58,11 @@ public class Player : KinematicBody2D
 			speed.x += accel * movInput * delta;
 		
 		speed.x = Mathf.Clamp(speed.x, -maxSpeed, maxSpeed);
-		
-		MoveAndSlide(speed,new Vector2(0,-1));
+	}
 
-		// gravity logic --------------------------------------
-		if(!IsOnFloor()){
+	void DoGravity(float delta)
+	{
+		if(!IsOnFloor()) {
 			if(speed.y > 0)
 				speed.y += gRise * delta;
 			else
@@ -55,7 +74,22 @@ public class Player : KinematicBody2D
 			if(speed.y > 5)
 				speed.y = 5;
 		}
+	}
 
-		GD.Print(movInput);
+	void Shoot(Vector2 dir)
+	{
+		if(GetNode<Timer>("GunTimer").IsStopped()) {
+			if(dir == Vector2.Zero) 
+				dir = new Vector2(1,0);
+			
+			var projectile = GD.Load<PackedScene>("res://PlayerProjectile.tscn");
+			PlayerProjectile projectileInst = projectile.Instance() as PlayerProjectile;
+			
+			(projectileInst as KinematicBody2D).Position = this.Position;
+			projectileInst.speed = dir * 500;
+			
+			GetParent().AddChild(projectileInst as KinematicBody2D);
+			GetNode<Timer>("GunTimer").Start();
+		}
 	}
 }
