@@ -6,8 +6,6 @@ public class JumpySlime : BasicSlime
 	Vector2 jumpStrength = new Vector2(200, 500);
 	Node2D target = null;
 	Timer jumpTimer = null;
-
-
 	
 	public override void _Ready()
 	{
@@ -30,7 +28,7 @@ public class JumpySlime : BasicSlime
 		else
 			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("jump");
 		
-		if (dead && Position.x > 1900) {
+		if (dead && Position.x > 1900 && !isMinion) {
 			GetParent<SlimeBoss>().SpawnNext(Position);
 			this.QueueFree();
 		}

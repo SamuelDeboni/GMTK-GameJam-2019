@@ -7,6 +7,9 @@ public class RedSlime : BasicSlime
 	Node2D target = null;
 	Timer jumpTimer = null;
 
+	[Export]
+	public PackedScene minion;
+
 	public override void _Ready()
 	{
 		jumpTimer = new Timer();

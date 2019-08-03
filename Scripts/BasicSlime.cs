@@ -14,6 +14,8 @@ public class BasicSlime : KinematicBody2D
 
 	public bool dead = false;
 
+	public bool isMinion = false;
+
 	public void Ready()
 	{
 		this.Connect("_on_stage_end",GetParent(),nameof(_on_stage_end));
@@ -32,9 +34,11 @@ public class BasicSlime : KinematicBody2D
 	{
 		this.hp -= damage;
 		if(this.hp <= 0) {
-			if(!dead)
+			if(!dead & !isMinion)
 				EmitSignal(nameof(_on_stage_end));
 			dead = true;
+			if(isMinion)
+				this.QueueFree();
 		}
 	}
 
