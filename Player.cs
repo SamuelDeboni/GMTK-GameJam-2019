@@ -63,7 +63,7 @@ public class Player : KinematicBody2D
 	void DoGravity(float delta)
 	{
 		if(!IsOnFloor()) {
-			if(speed.y > 0)
+			if(speed.y < 0)
 				speed.y += gRise * delta;
 			else
 				speed.y += gFall * delta;
@@ -86,7 +86,7 @@ public class Player : KinematicBody2D
 			PlayerProjectile projectileInst = projectile.Instance() as PlayerProjectile;
 			
 			(projectileInst as KinematicBody2D).Position = this.Position;
-			projectileInst.speed = dir * 500;
+			projectileInst.speed = dir * 800 + new Vector2(speed.x,0);
 			
 			GetParent().AddChild(projectileInst as KinematicBody2D);
 			GetNode<Timer>("GunTimer").Start();
