@@ -9,10 +9,11 @@ public class PurpleSlime : BasicSlime
 	Timer jumpTimer = null;
 	Timer shootTimer = null;
 
+	[Export]
+	PackedScene slimeProjectilePck;
+
 	public override void _Ready()
 	{
-		
-
 		jumpTimer = new Timer();
 		jumpTimer.Autostart = true;
 		jumpTimer.WaitTime = 2;
@@ -22,7 +23,7 @@ public class PurpleSlime : BasicSlime
 
 		shootTimer = new Timer();
 		shootTimer.Autostart = true;
-		shootTimer.WaitTime = 5f;
+		shootTimer.WaitTime = 1f;
 		AddChild(shootTimer);
 		shootTimer.Connect("timeout", this, nameof(Shoot));
 		shootTimer.Start();
@@ -44,7 +45,7 @@ public class PurpleSlime : BasicSlime
 		if (target != null && target.Position.x < Position.x && !dead)
 			direction = -1;
 
-		velocity = new Vector2(direction, -1) * jumpStrength;
+		velocity = (new Vector2(direction, -1) * jumpStrength);
 
 		if (velocity.y >= 0 && shootTimer.TimeLeft > 0.5f) {
 			GetNode<AnimatedSprite>("SlimeSprite").SetAnimation("default");
@@ -62,7 +63,14 @@ public class PurpleSlime : BasicSlime
 
 	public void Shoot()
 	{
+		KinematicBody2D sb = slimeProjectilePck.Instance() as KinematicBody2D;
+		sb.Position = Position + new Vector2(-32,-32);
 
+		int direction = 1;
+		if (target != null && target.Position.x < Position.x && !dead)
+			direction = -1;
+		(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, -1) * jumpStrength);
+		GetParent().AddChild(sb);
 	}
 
 	public void _on_Area2D_body_entered(PhysicsBody2D boddy)

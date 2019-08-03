@@ -10,6 +10,8 @@
 [ext_resource path="res://Sprites/slime2 spawning3.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/slime2 spawning4.png" type="Texture" id=9]
 
+
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
