@@ -3,7 +3,7 @@ using System;
 
 public class Camera : Node2D
 {
-	const int SPEED = 200;
+	const int SPEED = 100;
 	int targetPositionX = 0;
 
 	public override void _Ready()

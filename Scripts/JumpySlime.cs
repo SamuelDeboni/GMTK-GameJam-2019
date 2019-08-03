@@ -6,9 +6,9 @@ public class JumpySlime : BasicSlime
 	Vector2 jumpStrength = new Vector2(200, 500);
 	Node2D target = null;
 	Timer jumpTimer = null;
+
+
 	
-
-
 	public override void _Ready()
 	{
 		jumpTimer = new Timer();
@@ -17,20 +17,20 @@ public class JumpySlime : BasicSlime
 		AddChild(jumpTimer);
 		jumpTimer.Connect("timeout", this, nameof(Jump));
 		jumpTimer.Start();
-
-		target = GetNode("../Player") as Node2D;
+		target = GetNode("../../Player") as Node2D;
+		this.Connect("_on_stage_0_end",GetParent(),nameof(_on_stage_0_end));
 	}
 
 	public void Jump()
 	{
-		if (target == null)
+		if (target == null && !dead)
 			target = GetNode("../../Player") as Node2D;
 
 		int direction = 1;
-		if (target != null && target.Position.x < Position.x)
+		if (target != null && target.Position.x < Position.x && !dead)
 			direction = -1;
 
-		velocity += new Vector2(direction, -1) * jumpStrength;
+		velocity = new Vector2(direction, -1) * jumpStrength;
 	}
 
 	public void _on_Area2D_body_entered(PhysicsBody2D boddy)

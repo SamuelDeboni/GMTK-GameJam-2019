@@ -12,25 +12,34 @@ public class BasicSlime : KinematicBody2D
 	[Signal]
 	public delegate void _on_stage_0_end();
 
+	public bool dead = false;
 	public override void _Process(float delta)
 	{
 		if(!IsOnFloor())
 			velocity += Vector2.Down * GRAVITY * delta;
 		else
-			velocity -= velocity * 0.1f;
+			velocity.x -= velocity.x * 0.1f;
 		MoveAndSlide(velocity, new Vector2(0,-1));
 
-		this.Connect("_on_stage_0_end",GetParent(),nameof(_on_stage_0_end));
+		if (velocity.y >= 0)
+			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("default");
+		else
+			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("jump");
+		
+		if (dead && Position.x > 1900) {
+			GetParent<SlimeBoss>().SpawnNext(Position);
+			this.QueueFree();
+		}
 	}
 
 	public void Damage(int damage)
 	{
 		this.hp -= damage;
 		if(this.hp <= 0) {
-			EmitSignal(nameof(_on_stage_0_end));
-			this.QueueFree();
+			if(!dead)
+				EmitSignal(nameof(_on_stage_0_end));
+			dead = true;
 		}
 	}
-
 
 }
