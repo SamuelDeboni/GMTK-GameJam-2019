@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/PurpleSlime.cs" type="Script" id=1]
+[ext_resource path="res://Sprites/slime3.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/slime3 jump1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/slime3 jump2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/slime3 Armor.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/slime3 Armor jump1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/slime3 Armor jump2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/slime3 Armor Shooting.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "jump",
+"speed": 10.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "jump",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "shooting",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24.6131, 16 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 24.5012
+height = 26.2984
+
+[node name="PurpleSlime" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 1 )
+hp = 40
+
+[node name="SlimeSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -32 )
+frames = SubResource( 1 )
+playing = true
+
+[node name="ArmorSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -32 )
+frames = SubResource( 3 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -5.27039 )
+rotation = 1.5708
+shape = SubResource( 4 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

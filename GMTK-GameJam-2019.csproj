@@ -55,6 +55,7 @@
     <Compile Include="Scripts\BasicSlime.cs" />
     <Compile Include="Scripts\JumpySlime.cs" />
     <Compile Include="Scripts\PlayerProjectile.cs" />
+    <Compile Include="Scripts\PurpleSlime.cs" />
     <Compile Include="Scripts\RedSlime.cs" />
     <Compile Include="Scripts\SlimeBoss.cs" />
   </ItemGroup>

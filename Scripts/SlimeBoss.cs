@@ -4,7 +4,7 @@ using System;
 public class SlimeBoss : Node2D
 {
 	[Export]
-	public PackedScene JumpySlimePck, RedSlimePck;
+	public PackedScene JumpySlimePck, RedSlimePck, PurpleSlimePck;
 
 	[Signal]
 	public delegate void _next_stage();
@@ -31,17 +31,20 @@ public class SlimeBoss : Node2D
 
 		switch(currentStage) {
 
-			case 1:
+			case 1: {
 				GD.Print("stage 1");
 				KinematicBody2D slime = RedSlimePck.Instance() as KinematicBody2D;
 				this.AddChild(slime);
 				slime.Position = pos;
-				break;
-
-			case 2:
+				break; 
+			}
+			case 2: {
 				GD.Print("stage 2");
+				KinematicBody2D slime = PurpleSlimePck.Instance() as KinematicBody2D;
+				this.AddChild(slime);
+				slime.Position = pos;
 				break;
-			
+			}
 			default:
 
 				break;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Sprites/Dirt.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Grass.png" type="Texture" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://Scripts/SlimeBoss.cs" type="Script" id=7]
 [ext_resource path="res://JumpySlime.tscn" type="PackedScene" id=8]
 [ext_resource path="res://RedSlime.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Sprites/Background.png" type="Texture" id=10]
+[ext_resource path="res://PurpleSlime.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/Background.png" type="Texture" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -133,6 +134,7 @@ shape = SubResource( 6 )
 script = ExtResource( 7 )
 JumpySlimePck = ExtResource( 8 )
 RedSlimePck = ExtResource( 9 )
+PurpleSlimePck = ExtResource( 10 )
 
 [node name="Timer" type="Timer" parent="SlimeBoss"]
 wait_time = 10.0
@@ -145,6 +147,6 @@ scroll_limit_end = Vector2( 1280, 0 )
 
 [node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 640, 352 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [editable path="CameraHolder"]

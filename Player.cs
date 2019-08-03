@@ -34,16 +34,21 @@ public class Player : KinematicBody2D
 		DoGravity(delta);
 		MoveAndSlide(speed,new Vector2(0,-1));
 
-		if(Input.IsActionPressed("ui_right") || Input.IsActionPressed("ui_left")
+		if (Input.IsActionPressed("ui_right") || Input.IsActionPressed("ui_left")
 		|| Input.IsActionPressed("ui_up") || Input.IsActionPressed("ui_down")) {
 			gunDir.x = Input.GetActionStrength("ui_right") 
 				- Input.GetActionStrength("ui_left");
 			gunDir.y = Input.GetActionStrength("ui_down") 
 				- Input.GetActionStrength("ui_up");
+		} else if(gunDir.x == 0) {
+			gunDir.x = 1;
+			gunDir.y = 0;
 		}
 		
-		if(Input.IsActionPressed("fire"))
+		if (Input.IsActionPressed("fire"))
 			Shoot(gunDir);
+
+		GetNode<AnimatedSprite>("Sprite").FlipH = gunDir.x < 0;
 	}
 
 	void DoMovment(float delta)
