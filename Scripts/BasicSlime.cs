@@ -6,7 +6,7 @@ public class BasicSlime : KinematicBody2D
 	const float GRAVITY = 800;
 
 	[Export]
-	int hp = 10;
+	public int hp = 10;
 	protected Vector2 velocity;
 	
 	[Signal]
@@ -33,6 +33,7 @@ public class BasicSlime : KinematicBody2D
 	public void Damage(int damage)
 	{
 		this.hp -= damage;
+		
 		if(this.hp <= 0) {
 			if(!dead & !isMinion)
 				EmitSignal(nameof(_on_stage_end));

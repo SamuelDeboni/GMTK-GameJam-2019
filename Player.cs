@@ -10,6 +10,8 @@ public class Player : KinematicBody2D
 
 	Vector2 speed;
 
+	int hp = 3;
+
 
 	public override void _Ready()
 	{
@@ -91,5 +93,34 @@ public class Player : KinematicBody2D
 			GetParent().AddChild(projectileInst as KinematicBody2D);
 			GetNode<Timer>("GunTimer").Start();
 		}
+	}
+
+	void knockback(Vector2 enemyPos)
+	{
+		speed = new Vector2(Math.Sign(Position.x - enemyPos.x) * 500, -200);
+	}
+
+	public void _on_Area2D_body_entered(PhysicsBody2D boddy)
+	{
+		if(boddy is JumpySlime && GetNode<Timer>("DamageTimer").IsStopped()) {
+			hp--;
+			knockback(boddy.Position);
+			GD.Print(hp);
+			GetNode<Timer>("DamageTimer").Start();
+			GetNode<AnimatedSprite>("Sprite").SetAnimation("damage");
+		}
+
+		if(boddy is RedSlime && GetNode<Timer>("DamageTimer").IsStopped()) {
+			hp--;
+			knockback(boddy.Position);
+			GD.Print(hp);
+			GetNode<Timer>("DamageTimer").Start();
+			GetNode<AnimatedSprite>("Sprite").SetAnimation("damage");
+		}
+	}
+	
+	public void _on_DamageTimer_timeout()
+	{
+		GetNode<AnimatedSprite>("Sprite").SetAnimation("default");
 	}
 }

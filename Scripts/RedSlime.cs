@@ -3,9 +3,10 @@ using System;
 
 public class RedSlime : BasicSlime
 {	
-	Vector2 jumpStrength = new Vector2(200, 500);
+	Vector2 jumpStrength = new Vector2(200, 300);
 	Node2D target = null;
 	Timer jumpTimer = null;
+	Timer spawnTimer = null;
 
 	[Export]
 	public PackedScene minion;
@@ -18,6 +19,14 @@ public class RedSlime : BasicSlime
 		AddChild(jumpTimer);
 		jumpTimer.Connect("timeout", this, nameof(Jump));
 		jumpTimer.Start();
+
+		spawnTimer = new Timer();
+		spawnTimer.Autostart = true;
+		spawnTimer.WaitTime = 5f;
+		AddChild(spawnTimer);
+		spawnTimer.Connect("timeout", this, nameof(Spawn));
+		spawnTimer.Start();
+
 		target = GetNode("../../Player") as Node2D;
 		this.Ready();
 	}
@@ -30,6 +39,13 @@ public class RedSlime : BasicSlime
 			GetParent<SlimeBoss>().SpawnNext(Position);
 			this.QueueFree();
 		}
+
+		if (velocity.y >= 0 && spawnTimer.TimeLeft > 0.5f)
+			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("default");
+		else if (spawnTimer.TimeLeft > 0.5f)
+			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("jump");
+		else
+			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("spawning");
 	}
 	
 	public void Jump()
@@ -51,6 +67,17 @@ public class RedSlime : BasicSlime
 		if (b != null && b is PlayerProjectile){
 			this.Damage(1);
 			b.QueueFree();
+		}
+	}
+
+	public void Spawn()
+	{
+		if(!dead) {
+			JumpySlime slime = minion.Instance() as JumpySlime;
+			slime.Position = Position + new Vector2(-32,-32);
+			(slime as BasicSlime).isMinion = true;
+			(slime as BasicSlime).hp = 5;
+			GetParent().AddChild(slime);
 		}
 	}
 }
