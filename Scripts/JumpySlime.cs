@@ -13,12 +13,27 @@ public class JumpySlime : BasicSlime
 	{
 		jumpTimer = new Timer();
 		jumpTimer.Autostart = true;
-		jumpTimer.WaitTime = 3;
+		jumpTimer.WaitTime = 2;
 		AddChild(jumpTimer);
 		jumpTimer.Connect("timeout", this, nameof(Jump));
 		jumpTimer.Start();
 		target = GetNode("../../Player") as Node2D;
-		this.Connect("_on_stage_0_end",GetParent(),nameof(_on_stage_0_end));
+		this.Ready();
+	}
+
+	public override void _Process(float delta)
+	{
+		this.Process(delta);
+
+		if (velocity.y >= 0)
+			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("default");
+		else
+			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("jump");
+		
+		if (dead && Position.x > 1900) {
+			GetParent<SlimeBoss>().SpawnNext(Position);
+			this.QueueFree();
+		}
 	}
 
 	public void Jump()

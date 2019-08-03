@@ -19,9 +19,9 @@ public class SlimeBoss : Node2D
 		GD.Print("start");
 	}
 
-	public void _on_stage_0_end()
+	public void _on_stage_end()
 	{
-		GD.Print("Stage 0 ended");
+		GD.Print("Stage ended");
 		EmitSignal("_next_stage");
 	}
 
@@ -36,11 +36,15 @@ public class SlimeBoss : Node2D
 				KinematicBody2D slime = RedSlimePck.Instance() as KinematicBody2D;
 				this.AddChild(slime);
 				slime.Position = pos;
-			break;
+				break;
 
+			case 2:
+				GD.Print("stage 2");
+				break;
+			
 			default:
 
-			break;
+				break;
 		}
 
 	}
