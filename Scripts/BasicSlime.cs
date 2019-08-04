@@ -13,6 +13,8 @@ public class BasicSlime : KinematicBody2D
 	
 	[Signal]
 	public delegate void _on_stage_end();
+	[Signal]
+	public delegate void _on_damage();
 
 	[Signal]
 	public delegate void UpdateBar(float value);
@@ -25,6 +27,8 @@ public class BasicSlime : KinematicBody2D
 	{
 		hp = Maxhp;
 		this.Connect("_on_stage_end",GetParent(),nameof(_on_stage_end));
+		this.Connect("_on_damage", GetParent(), nameof(_on_damage));
+
 		if (!isMinion)
 			this.Connect("UpdateBar",GetParent(),nameof(UpdateBar));
 	}
@@ -41,6 +45,7 @@ public class BasicSlime : KinematicBody2D
 	public void Damage(int damage)
 	{
 		this.hp -= damage;
+		EmitSignal(nameof(_on_damage));
 
 		if (!isMinion && !dead)
 			EmitSignal(nameof(UpdateBar),100*((float)hp/(float)Maxhp));

@@ -8,6 +8,8 @@ public class SlimeBoss : Node2D
 
 	[Signal]
 	public delegate void _next_stage();
+	[Signal]
+	public delegate void _shake_camera(float intensity);
 
 	int currentStage = 0;
 
@@ -32,6 +34,11 @@ public class SlimeBoss : Node2D
 	{
 		GD.Print("Stage ended");
 		EmitSignal("_next_stage");
+	}
+
+	public void _on_damage()
+	{
+		EmitSignal("_shake_camera", 10);
 	}
 
 	public void UpdateBar(float value) 
