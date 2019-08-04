@@ -144,7 +144,9 @@ public class Player : KinematicBody2D
 	{
 		if ((boddy is JumpySlime 
 		  || boddy is RedSlime 
-		  || boddy is PurpleSlime) 
+		  || boddy is PurpleSlime
+		  || boddy is PurpleBall
+		  || boddy is PurpleProjectile) 
 		  && GetNode<Timer>("DamageTimer").IsStopped()) {
 			hp--;
 			knockback(boddy.Position);
