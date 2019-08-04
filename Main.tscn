@@ -244,7 +244,8 @@ margin_bottom = 22.3172
 rect_rotation = 89.9999
 text = "HP"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+autoplay = true
 
 [editable path="CameraHolder"]
