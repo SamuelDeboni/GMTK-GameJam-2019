@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Sprites/Dirt.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Grass.png" type="Texture" id=2]
@@ -111,6 +111,32 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0.180392, 1, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0.0705882, 0.462745, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 0.00784314, 0.0627451, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.301961, 0.360784, 1, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -168,16 +194,21 @@ one_shot = true
 
 [node name="ProgressBar" type="ProgressBar" parent="SlimeBoss/CanvasLayer"]
 margin_left = 464.0
-margin_top = 16.0
+margin_top = 32.0
 margin_right = 816.0
-margin_bottom = 34.0
+margin_bottom = 50.0
 custom_styles/fg = SubResource( 7 )
 custom_styles/bg = SubResource( 8 )
 value = 100.0
 percent_visible = false
 
+[node name="Label" type="Label" parent="SlimeBoss/CanvasLayer/ProgressBar"]
+margin_left = 160.0
+margin_top = -16.0
+margin_right = 208.0
+text = "SLIME"
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-editor/display_folded = true
 scroll_limit_end = Vector2( 1280, 0 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -185,5 +216,27 @@ scroll_limit_end = Vector2( 1280, 0 )
 [node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 640, 352 )
 texture = ExtResource( 11 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHP" type="ProgressBar" parent="CanvasLayer"]
+margin_left = 16.0
+margin_top = 336.0
+margin_right = 92.0
+margin_bottom = 366.0
+rect_rotation = -89.9999
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 10 )
+max_value = 3.0
+value = 3.0
+percent_visible = false
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayerHP"]
+margin_left = 21.2816
+margin_top = 6.3172
+margin_right = 51.2816
+margin_bottom = 22.3172
+rect_rotation = 89.9999
+text = "HP"
 
 [editable path="CameraHolder"]

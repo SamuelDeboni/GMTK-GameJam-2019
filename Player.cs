@@ -155,6 +155,7 @@ public class Player : KinematicBody2D
 			GD.Print(hp);
 			GetNode<Timer>("DamageTimer").Start();
 			GetNode<AnimatedSprite>("Sprite").SetAnimation("damage");
+			GetNode<ProgressBar>("../CanvasLayer/PlayerHP").Value = hp;
 		}
 	}
 	

@@ -25,7 +25,7 @@ public class SlimeBoss : Node2D
 	{
 		GetNode<ProgressBar>("CanvasLayer/ProgressBar").SetValue(lifeBarValue);
 		if(Math.Abs(lifeBarTarget - lifeBarValue) > 0)
-			lifeBarValue += Math.Sign(lifeBarTarget - lifeBarValue);
+			lifeBarValue += Math.Sign(lifeBarTarget - lifeBarValue) * 2;
 	} 
 
 	public void _on_stage_end()
