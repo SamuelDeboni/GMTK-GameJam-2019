@@ -42,7 +42,7 @@ public class BasicSlime : KinematicBody2D
 	{
 		this.hp -= damage;
 
-		if (!isMinion)
+		if (!isMinion && !dead)
 			EmitSignal(nameof(UpdateBar),100*((float)hp/(float)Maxhp));
 
 		if(this.hp <= 0) {
