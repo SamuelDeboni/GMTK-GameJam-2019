@@ -90,7 +90,7 @@ frame = 6
 shape = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 4100
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

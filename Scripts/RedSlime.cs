@@ -35,7 +35,7 @@ public class RedSlime : BasicSlime
 	{
 		this.Process(delta);
 
-		if (dead && Position.x > 3200) {
+		if (dead && Position.x > 1690) {
 			GetParent<SlimeBoss>().SpawnNext(Position);
 			this.QueueFree();
 		}

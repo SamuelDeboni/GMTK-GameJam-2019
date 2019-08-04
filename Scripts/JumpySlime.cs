@@ -28,7 +28,7 @@ public class JumpySlime : BasicSlime
 		else
 			GetNode<AnimatedSprite>("AnimatedSprite").SetAnimation("jump");
 		
-		if (dead && Position.x > 1900 && !isMinion) {
+		if (dead && Position.x > 950 && !isMinion) {
 			GetParent<SlimeBoss>().SpawnNext(Position);
 			this.QueueFree();
 		}

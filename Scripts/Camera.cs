@@ -42,7 +42,7 @@ public class Camera : Node2D
 
 	public void NextLevel()
 	{
-		targetPositionX += 1280;
+		targetPositionX += 640;
 	}
 
 	public void Shake(float intensity)
