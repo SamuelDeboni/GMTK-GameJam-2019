@@ -22,7 +22,7 @@ public class RedSlime : BasicSlime
 
 		spawnTimer = new Timer();
 		spawnTimer.Autostart = true;
-		spawnTimer.WaitTime = 5f;
+		spawnTimer.WaitTime = 2.5f;
 		AddChild(spawnTimer);
 		spawnTimer.Connect("timeout", this, nameof(Spawn));
 		spawnTimer.Start();
