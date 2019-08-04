@@ -11,6 +11,11 @@ public class SlimeBoss : Node2D
 	[Signal]
 	public delegate void _shake_camera(float intensity);
 
+	[Export]
+	public AudioStream musica2;
+
+	[Export]
+	bool chosen;
 	int currentStage = 0;
 
 	float lifeBarTarget = 100, lifeBarValue;
@@ -65,10 +70,15 @@ public class SlimeBoss : Node2D
 				KinematicBody2D slime = PurpleSlimePck.Instance() as KinematicBody2D;
 				this.AddChild(slime);
 				slime.Position = pos;
+				GetNode<AudioStreamPlayer>("../AudioStreamPlayer").SetStream(musica2);
 				break;
 			}
 			case 3: {
 				GD.Print("stage 3");
+				if (chosen)
+					GetTree().ChangeScene("res://Victory2.tscn");
+				else
+					GetTree().ChangeScene("res://Victory.tscn");
 				break;
 			}
 			default:
