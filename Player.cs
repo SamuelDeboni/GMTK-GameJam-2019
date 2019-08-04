@@ -133,6 +133,7 @@ public class Player : KinematicBody2D
 			
 			(projectileInst as KinematicBody2D).Position = this.Position;
 			projectileInst.speed = dir * 800 + new Vector2(speed.x,0);
+			projectileInst.LookAt(dir.Normalized() * 100 + Position);
 			
 			GetParent().AddChild(projectileInst as KinematicBody2D);
 			GetNode<Timer>("GunTimer").Start();

@@ -70,6 +70,7 @@ Maxhp = 30
 slimeProjectilePck = ExtResource( 2 )
 
 [node name="SlimeSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.584314 )
 position = Vector2( 0, -32 )
 frames = SubResource( 1 )
 playing = true
@@ -80,6 +81,7 @@ frames = SubResource( 2 )
 playing = true
 
 [node name="BallSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.686275 )
 position = Vector2( 0, -32 )
 frames = SubResource( 3 )
 frame = 6

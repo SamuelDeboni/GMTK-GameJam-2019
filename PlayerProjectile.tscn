@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/PlayerProjectile.cs" type="Script" id=1]
-[ext_resource path="res://Sprites/PlayerProjectile.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Slayer/lance projectile.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/8bit_gunloop_explosion.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]

@@ -35,6 +35,7 @@ extents = Vector2( 24.2805, 16 )
 radius = 32.0
 
 [node name="RedSlime" type="KinematicBody2D"]
+modulate = Color( 1, 1, 1, 0.654902 )
 collision_layer = 4
 script = ExtResource( 1 )
 Maxhp = 20
