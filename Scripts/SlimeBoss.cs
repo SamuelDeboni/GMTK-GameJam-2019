@@ -59,8 +59,12 @@ public class SlimeBoss : Node2D
 				slime.Position = pos;
 				break;
 			}
+			case 3: {
+				GD.Print("stage 3");
+				break;
+			}
 			default:
-
+				
 				break;
 		}
 
