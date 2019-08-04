@@ -53,7 +53,8 @@ public class BasicSlime : KinematicBody2D
 		if(this.hp <= 0) {
 			if(!dead & !isMinion) {
 				EmitSignal(nameof(_on_stage_end));
-				EmitSignal(nameof(UpdateBar),100);
+				if (!(this is PurpleSlime))
+					EmitSignal(nameof(UpdateBar),100);
 			}
 			dead = true;
 			if(isMinion)

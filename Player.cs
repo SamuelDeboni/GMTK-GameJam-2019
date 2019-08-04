@@ -48,6 +48,9 @@ public class Player : KinematicBody2D
 		if (Input.IsActionPressed("fire"))
 			Shoot(gunDir);
 		DoAnimation();
+
+		if (hp <= 0)
+			GetTree().ReloadCurrentScene();
 	}
 
 	void DoAnimation() {
