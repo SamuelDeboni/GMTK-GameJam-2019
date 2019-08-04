@@ -142,7 +142,6 @@ corner_radius_bottom_left = 10
 [node name="Main" type="Node2D"]
 
 [node name="Tree" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 288, 592 )
 texture = ExtResource( 1 )
 
@@ -177,6 +176,7 @@ fallTime = 0.3
 maxSpeed = 256.0
 accTime = 0.1
 stopTime = 0.2
+oneLife = true
 
 [node name="CameraHolder" parent="." instance=ExtResource( 7 )]
 
@@ -248,6 +248,7 @@ centered = false
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerHP" type="ProgressBar" parent="CanvasLayer"]
+visible = false
 margin_left = 16.0
 margin_top = 336.0
 margin_right = 92.0

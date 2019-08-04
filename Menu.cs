@@ -7,4 +7,9 @@ public class Menu : Control
 	{
 		GetTree().ChangeScene("res://Main.tscn");
 	}
+
+	public void _on_one_button_up()
+	{
+		GetTree().ChangeScene("res://One.tscn");
+	}
 }

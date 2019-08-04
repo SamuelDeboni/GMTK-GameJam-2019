@@ -12,6 +12,8 @@ public class Player : KinematicBody2D
 
 	int hp = 3;
 
+	[Export]
+	public bool oneLife;
 
 	public override void _Ready()
 	{
@@ -24,6 +26,9 @@ public class Player : KinematicBody2D
 		decel = maxSpeed / stopTime;
 
 		GD.Print(accel.ToString() + " " + decel.ToString() + " " + jumpSpeed.ToString());
+
+		if (oneLife)
+			hp = 1;
 	}
 	
 	Vector2 gunDir = new Vector2(1,0);
