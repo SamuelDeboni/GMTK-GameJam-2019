@@ -47,8 +47,47 @@ public class Player : KinematicBody2D
 		
 		if (Input.IsActionPressed("fire"))
 			Shoot(gunDir);
+		
+		
+
+		DoAnimation();
+
+		
+	}
+
+	void DoAnimation() {
+		Vector2 dir;
+		dir.x = Math.Abs(gunDir.x);
+		dir.y = gunDir.y;
+
+		bool fire = Input.IsActionPressed("fire");
+
+		AnimatedSprite lance = GetNode<AnimatedSprite>("Lance");
+
+		if (dir.x == 1 && dir.y == 0 && fire) {
+			lance.SetAnimation("horizontal");
+		} else if (dir.x == 1 && dir.y == -1 && fire) {
+			lance.SetAnimation("d_up");
+		} else if (dir.x == 0 && dir.y == -1 && fire) {
+			lance.SetAnimation("up");
+		} else if (dir.x == 1 && dir.y == 1 && fire) {
+			lance.SetAnimation("d_down");
+		} else if (dir.x == 0 && dir.y == 1 && fire) {
+			lance.SetAnimation("down");
+		} else if (Math.Abs(speed.x) > 0) {
+			lance.SetAnimation("walk");
+		} else {
+			lance.SetAnimation("stop");
+		}
+
+		if (Math.Abs(speed.x) > 0) {
+			GetNode<AnimatedSprite>("Sprite").SetAnimation("walk");
+		} else {
+			GetNode<AnimatedSprite>("Sprite").SetAnimation("default");
+		}
 
 		GetNode<AnimatedSprite>("Sprite").FlipH = gunDir.x < 0;
+		lance.FlipH = gunDir.x < 0;
 	}
 
 	void DoMovment(float delta)
@@ -107,15 +146,10 @@ public class Player : KinematicBody2D
 
 	public void _on_Area2D_body_entered(PhysicsBody2D boddy)
 	{
-		if(boddy is JumpySlime && GetNode<Timer>("DamageTimer").IsStopped()) {
-			hp--;
-			knockback(boddy.Position);
-			GD.Print(hp);
-			GetNode<Timer>("DamageTimer").Start();
-			GetNode<AnimatedSprite>("Sprite").SetAnimation("damage");
-		}
-
-		if(boddy is RedSlime && GetNode<Timer>("DamageTimer").IsStopped()) {
+		if ((boddy is JumpySlime 
+		  || boddy is RedSlime 
+		  || boddy is PurpleSlime) 
+		  && GetNode<Timer>("DamageTimer").IsStopped()) {
 			hp--;
 			knockback(boddy.Position);
 			GD.Print(hp);

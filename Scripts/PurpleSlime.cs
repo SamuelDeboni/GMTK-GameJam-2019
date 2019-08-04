@@ -23,7 +23,7 @@ public class PurpleSlime : BasicSlime
 
 		shootTimer = new Timer();
 		shootTimer.Autostart = true;
-		shootTimer.WaitTime = 1f;
+		shootTimer.WaitTime = 3;
 		AddChild(shootTimer);
 		shootTimer.Connect("timeout", this, nameof(Shoot));
 		shootTimer.Start();
@@ -40,15 +40,13 @@ public class PurpleSlime : BasicSlime
 		else 
 			GetNode<AnimatedSprite>("SlimeSprite").SetAnimation("jump");
  
-		
-		if (shootTimer.TimeLeft < 0.2f) {
+		if (shootTimer.TimeLeft < 0.2f) 
 			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("shooting");
-			jumpTimer.Start();
-		} else if (velocity.y >= 0) {
+		 else if (velocity.y >= 0) 
 			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("default");
-		} else { 
+		 else 
 			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("jump");
-		}
+		
 	}
 
 	public void Jump()
@@ -65,14 +63,27 @@ public class PurpleSlime : BasicSlime
 
 	public void Shoot()
 	{
-		KinematicBody2D sb = slimeProjectilePck.Instance() as KinematicBody2D;
-		sb.Position = Position + new Vector2(-32,-32);
+		{
+			KinematicBody2D sb = slimeProjectilePck.Instance() as KinematicBody2D;
+			sb.Position = Position + new Vector2(-32,-32);
 
-		int direction = 1;
-		if (target != null && target.Position.x < Position.x && !dead)
-			direction = -1;
-		(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, -1) * jumpStrength);
-		GetParent().AddChild(sb);
+			int direction = 1;
+			if (target != null && target.Position.x < Position.x && !dead)
+				direction = -1;
+			(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, -1) * jumpStrength);
+			GetParent().AddChild(sb);
+		}
+
+		{
+			KinematicBody2D sb = slimeProjectilePck.Instance() as KinematicBody2D;
+			sb.Position = Position + new Vector2(32,-32);
+
+			int direction = 1;
+			if (target != null && target.Position.x < Position.x && !dead)
+				direction = -1;
+			(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, -1) * jumpStrength);
+			GetParent().AddChild(sb);
+		}
 	}
 
 	public void _on_Area2D_body_entered(PhysicsBody2D boddy)

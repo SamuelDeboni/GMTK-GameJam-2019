@@ -7,6 +7,6 @@ public class PurpleProjectile : KinematicBody2D
 	public override void _Process(float delta)
 	{
 		MoveAndCollide(velocity * delta);
-		velocity.y += 20 * delta;
+		velocity.y += 800 * delta;
 	}
 }
