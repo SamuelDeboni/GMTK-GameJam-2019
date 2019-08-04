@@ -53,9 +53,9 @@ public class Camera : Node2D
 	}
 
 	private Vector2 RandomInsideUnitCircle()
-    {
-        float r = Mathf.Sqrt((float)GD.RandRange(0, 1));
-        float theta = (float)GD.RandRange(0, 1) * 2 * Mathf.Pi;
-        return new Vector2(Mathf.Cos(theta), Mathf.Sin(theta)) * r;
-    }
+	{
+		float r = Mathf.Sqrt((float)GD.RandRange(0, 1));
+		float theta = (float)GD.RandRange(0, 1) * 2 * Mathf.Pi;
+		return new Vector2(Mathf.Cos(theta), Mathf.Sin(theta)) * r;
+	}
 }

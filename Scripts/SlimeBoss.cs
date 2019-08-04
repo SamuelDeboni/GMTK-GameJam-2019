@@ -38,7 +38,7 @@ public class SlimeBoss : Node2D
 
 	public void _on_damage()
 	{
-		EmitSignal("_shake_camera", 10);
+		EmitSignal("_shake_camera", 5);
 	}
 
 	public void UpdateBar(float value) 
