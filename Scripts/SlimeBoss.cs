@@ -33,7 +33,8 @@ public class SlimeBoss : Node2D
 	public void _on_stage_end()
 	{
 		GD.Print("Stage ended");
-		EmitSignal("_next_stage");
+		if (currentStage < 2)
+			EmitSignal("_next_stage");
 	}
 
 	public void _on_damage()

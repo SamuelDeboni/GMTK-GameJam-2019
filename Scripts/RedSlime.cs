@@ -3,7 +3,7 @@ using System;
 
 public class RedSlime : BasicSlime
 {	
-	Vector2 jumpStrength = new Vector2(200, 300);
+	Vector2 jumpStrength = new Vector2(300, 500);
 	Node2D target = null;
 	Timer jumpTimer = null;
 	Timer spawnTimer = null;
@@ -76,7 +76,7 @@ public class RedSlime : BasicSlime
 			JumpySlime slime = minion.Instance() as JumpySlime;
 			slime.Position = Position + new Vector2(-32,-32);
 			(slime as BasicSlime).isMinion = true;
-			(slime as BasicSlime).hp = 5;
+			(slime as BasicSlime).Maxhp = 5;
 			GetParent().AddChild(slime);
 		}
 	}

@@ -4,7 +4,7 @@ using System;
 public class PurpleSlime : BasicSlime
 {
 
-	Vector2 jumpStrength = new Vector2(200, 300);
+	Vector2 jumpStrength = new Vector2(300, 500);
 	Node2D target = null;
 	Timer jumpTimer = null;
 	Timer shootTimer = null;
@@ -66,6 +66,11 @@ public class PurpleSlime : BasicSlime
 			int direction = target.Position.x > Position.x ? 1 : -1;
 			GetNode<AnimatedSprite>("BallSprite").FlipH = direction == -1;
 			ballAnimationRan = true;
+		}
+
+		if (dead) {
+			GetParent<SlimeBoss>().SpawnNext(Position);
+			this.QueueFree();
 		}
 		
 	}
