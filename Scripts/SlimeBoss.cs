@@ -11,6 +11,8 @@ public class SlimeBoss : Node2D
 
 	int currentStage = 0;
 
+	float lifeBarTarget = 100, lifeBarValue;
+
 	public override void _Ready()
 	{
 		KinematicBody2D slime = JumpySlimePck.Instance() as KinematicBody2D;
@@ -19,10 +21,22 @@ public class SlimeBoss : Node2D
 		GD.Print("start");
 	}
 
+	public override void _Process(float delta)
+	{
+		GetNode<ProgressBar>("CanvasLayer/ProgressBar").SetValue(lifeBarValue);
+		if(Math.Abs(lifeBarTarget - lifeBarValue) > 0)
+			lifeBarValue += Math.Sign(lifeBarTarget - lifeBarValue);
+	} 
+
 	public void _on_stage_end()
 	{
 		GD.Print("Stage ended");
 		EmitSignal("_next_stage");
+	}
+
+	public void UpdateBar(float value) 
+	{
+		lifeBarTarget = value;
 	}
 
 	public void SpawnNext(Vector2 pos)

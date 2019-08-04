@@ -6,11 +6,16 @@ public class BasicSlime : KinematicBody2D
 	const float GRAVITY = 800;
 
 	[Export]
-	public int hp = 10;
+	public int Maxhp = 10;
+
+	public int hp;
 	protected Vector2 velocity;
 	
 	[Signal]
 	public delegate void _on_stage_end();
+
+	[Signal]
+	public delegate void UpdateBar(float value);
 
 	public bool dead = false;
 
@@ -18,7 +23,10 @@ public class BasicSlime : KinematicBody2D
 
 	public void Ready()
 	{
+		hp = Maxhp;
 		this.Connect("_on_stage_end",GetParent(),nameof(_on_stage_end));
+		if (!isMinion)
+			this.Connect("UpdateBar",GetParent(),nameof(UpdateBar));
 	}
 
 	public void Process(float delta)
@@ -33,10 +41,15 @@ public class BasicSlime : KinematicBody2D
 	public void Damage(int damage)
 	{
 		this.hp -= damage;
-		
+
+		if (!isMinion)
+			EmitSignal(nameof(UpdateBar),100*((float)hp/(float)Maxhp));
+
 		if(this.hp <= 0) {
-			if(!dead & !isMinion)
+			if(!dead & !isMinion) {
 				EmitSignal(nameof(_on_stage_end));
+				EmitSignal(nameof(UpdateBar),100);
+			}
 			dead = true;
 			if(isMinion)
 				this.QueueFree();
