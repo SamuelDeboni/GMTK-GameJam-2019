@@ -19,7 +19,7 @@ public class SlimeBoss : Node2D
 	{
 		KinematicBody2D slime = JumpySlimePck.Instance() as KinematicBody2D;
 		this.AddChild(slime);
-		slime.Position = new Vector2(992,592);
+		slime.Position = new Vector2(500,592);
 		GD.Print("start");
 	}
 
