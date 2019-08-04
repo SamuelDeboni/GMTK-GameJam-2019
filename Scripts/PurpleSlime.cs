@@ -28,7 +28,7 @@ public class PurpleSlime : BasicSlime
 
 		shootTimer = new Timer();
 		shootTimer.Autostart = true;
-		shootTimer.WaitTime = 3;
+		shootTimer.WaitTime = 1;
 		AddChild(shootTimer);
 		shootTimer.Connect("timeout", this, nameof(Shoot));
 		shootTimer.Start();
@@ -91,7 +91,7 @@ public class PurpleSlime : BasicSlime
 			int direction = 1;
 			if (target != null && target.Position.x < Position.x && !dead)
 				direction = -1;
-			(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, 0) * jumpStrength);
+			(sb as PurpleProjectile).velocity = new Vector2(-500,0) * (float)GD.Randf();
 			GetParent().AddChild(sb);
 		}
 
@@ -102,7 +102,7 @@ public class PurpleSlime : BasicSlime
 			int direction = 1;
 			if (target != null && target.Position.x < Position.x && !dead)
 				direction = -1;
-			(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, -1) * jumpStrength);
+			(sb as PurpleProjectile).velocity = new Vector2(500,0) * (float)GD.Randf();
 			GetParent().AddChild(sb);
 		}
 	}
