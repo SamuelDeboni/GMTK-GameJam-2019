@@ -10,8 +10,6 @@
 [ext_resource path="res://Sprites/slime2 spawning3.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/slime2 spawning4.png" type="Texture" id=9]
 
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
@@ -39,7 +37,7 @@ radius = 32.0
 [node name="RedSlime" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
-hp = 20
+Maxhp = 20
 minion = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
