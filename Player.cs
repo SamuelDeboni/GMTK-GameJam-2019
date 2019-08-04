@@ -56,6 +56,9 @@ public class Player : KinematicBody2D
 
 		if (hp <= 0)
 			GetTree().ReloadCurrentScene();
+		
+		if (Input.IsActionJustPressed("ui_cancel"))
+			GetTree().ChangeScene("res://Menu.tscn");
 	}
 
 	void DoAnimation() {

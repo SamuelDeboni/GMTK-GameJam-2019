@@ -1,17 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Victory.cs" type="Script" id=1]
-[ext_resource path="res://NotoSans-Medium.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://ending_normal.png" type="Texture" id=3]
+[ext_resource path="res://black.png" type="Texture" id=2]
+[ext_resource path="res://NotoSans-Medium.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://ending_normal.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="Victory" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+
+[node name="black" type="Sprite" parent="."]
+position = Vector2( 768, 504 )
+scale = Vector2( 2.1, 1.93333 )
+texture = ExtResource( 2 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_left = 896.0
@@ -36,5 +42,5 @@ text = "Back"
 
 [node name="ending_normal" type="Sprite" parent="."]
 position = Vector2( 640, 352 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 [connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]
