@@ -121,7 +121,5 @@ shape = SubResource( 3 )
 wait_time = 0.5
 one_shot = true
 autostart = true
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]

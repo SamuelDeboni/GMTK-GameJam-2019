@@ -47,12 +47,7 @@ public class Player : KinematicBody2D
 		
 		if (Input.IsActionPressed("fire"))
 			Shoot(gunDir);
-		
-		
-
 		DoAnimation();
-
-		
 	}
 
 	void DoAnimation() {

@@ -91,7 +91,7 @@ public class PurpleSlime : BasicSlime
 			int direction = 1;
 			if (target != null && target.Position.x < Position.x && !dead)
 				direction = -1;
-			(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, -1) * jumpStrength);
+			(sb as PurpleProjectile).velocity = 2*(new Vector2(direction, 0) * jumpStrength);
 			GetParent().AddChild(sb);
 		}
 
