@@ -67,7 +67,7 @@ height = 26.2984
 [node name="PurpleSlime" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
-Maxhp = 30
+Maxhp = 40
 slimeProjectilePck = ExtResource( 2 )
 slimeBallPck = ExtResource( 3 )
 

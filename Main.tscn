@@ -246,6 +246,7 @@ text = "HP"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+volume_db = -14.083
 autoplay = true
 
 [editable path="CameraHolder"]

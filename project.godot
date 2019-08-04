@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="GMTK-GameJam-2019"
 run/main_scene="res://Menu.tscn"
+boot_splash/image="res://HyperDrop_Studios.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://Sprites/Slime.png"
 
