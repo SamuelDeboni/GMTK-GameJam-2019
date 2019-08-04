@@ -34,6 +34,17 @@ public class PurpleSlime : BasicSlime
 	public override void _Process(float delta)
 	{
 		this.Process(delta);
+
+		if (velocity.y >= 0 && shootTimer.TimeLeft > 0.5f) {
+			GetNode<AnimatedSprite>("SlimeSprite").SetAnimation("default");
+			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("default");
+		} else if (shootTimer.TimeLeft > 0.5f) {
+			GetNode<AnimatedSprite>("SlimeSprite").SetAnimation("jump");
+			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("jump");
+		} else {
+			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("shooting");
+			jumpTimer.Start();
+		}
 	}
 
 	public void Jump()
@@ -46,19 +57,6 @@ public class PurpleSlime : BasicSlime
 			direction = -1;
 
 		velocity = (new Vector2(direction, -1) * jumpStrength);
-
-		if (velocity.y >= 0 && shootTimer.TimeLeft > 0.5f) {
-			GetNode<AnimatedSprite>("SlimeSprite").SetAnimation("default");
-			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("default");
-		} else if (shootTimer.TimeLeft > 0.5f) {
-			GetNode<AnimatedSprite>("SlimeSprite").SetAnimation("jump");
-			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("jump");
-		} else {
-			GetNode<AnimatedSprite>("ArmorSprite").SetAnimation("shooting");
-			jumpTimer.Start();
-		}
-
-		
 	}
 
 	public void Shoot()
