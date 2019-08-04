@@ -3,7 +3,7 @@ using System;
 
 public class RedSlime : BasicSlime
 {	
-	Vector2 jumpStrength = new Vector2(300, 500);
+	Vector2 jumpStrength = new Vector2(250, 400);
 	Node2D target = null;
 	Timer jumpTimer = null;
 	Timer spawnTimer = null;
